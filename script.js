@@ -74,29 +74,9 @@ const PROJECTS = [
       "<strong>Role-based access</strong> (Viewer → Analyst → Admin → Superadmin) and rate limiting via Kong",
     ],
   },
-  {
-    id: "phinvoice",
-    icon: "🥐",
-    title: "Pacific Hut Invoice System",
-    subtitle: "Full-Stack Developer · Real client",
-    summary:
-      "Invoice and production coordination system for a Calgary bakery: six microservices, an admin dashboard, a driver delivery app, and QuickBooks sync.",
-    categories: ["fullstack", "microservices"],
-    stack: ["TypeScript", "Node.js", "React", "PostgreSQL", "PWA", "QuickBooks API", "Docker", "CI/CD"],
-    liveUrl: null,
-    problem:
-      "Orders, production planning, delivery routes, and invoicing lived in separate manual processes, which caused errors and double entry.",
-    highlights: [
-      "<strong>6 microservices</strong>: identity/JWT, catalog, customer-routes, invoicing, production planning, and QuickBooks sync",
-      "<strong>Admin dashboard</strong> for invoices, credits, standing orders, and production projections",
-      "<strong>Driver PWA</strong> for on-route delivery submissions",
-      "<strong>QuickBooks Online integration</strong> to remove double entry",
-      "<strong>CI/CD pipeline</strong> with auto-deployed staging and approval-gated production releases",
-    ],
-  },
 ];
 
-const FILTER_LABELS = { ai: "AI / ML", fullstack: "Full-Stack", microservices: "Microservices", data: "Data" };
+const FILTER_LABELS = { ai: "AI / ML", fullstack: "Full-Stack", data: "Data" };
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -290,7 +270,7 @@ const COMMANDS = {
       ["projects", "list featured projects"],
       ["open <n>", "open project details (e.g. open 1)"],
       ["skills", "my toolbox"],
-      ["filter <tag>", "filter project grid: ai, fullstack, microservices, data, all"],
+      ["filter <tag>", "filter project grid: ai, fullstack, data, all"],
       ["contact", "how to reach me"],
       ["theme", "toggle dark / light mode"],
       ["clear", "clear the terminal"],
@@ -318,7 +298,7 @@ const COMMANDS = {
       "Supabase · scikit-learn · Claude API · Docker · CI/CD"),
   filter: (arg) => {
     const f = (arg || "").toLowerCase();
-    if (f !== "all" && !FILTER_LABELS[f]) return print("Usage: filter ai|fullstack|microservices|data|all", "err");
+    if (f !== "all" && !FILTER_LABELS[f]) return print("Usage: filter ai|fullstack|data|all", "err");
     applyFilter(f);
     print(`Filtered projects to: ${f === "all" ? "All" : FILTER_LABELS[f]}`);
     $("#projects").scrollIntoView({ behavior: "smooth" });
