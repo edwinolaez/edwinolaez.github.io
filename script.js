@@ -24,6 +24,11 @@ const PROJECTS = [
     categories: ["ai", "data"],
     stack: ["Python", "scikit-learn", "pandas", "Streamlit", "Claude API", "Docker"],
     liveUrl: "https://smart-schedule-optimizer-production.up.railway.app",
+    video: {
+      src: "media/relayops-journey.mp4",
+      poster: "media/relayops-journey-poster.jpg",
+      label: "Relay OPS journey video (1:30, subtitled)",
+    },
     problem:
       "QSR turnover runs 75–150% a year and most GMs still schedule from intuition and spreadsheets. Poor schedules hurt morale, which hurts service, which hurts sales.",
     highlights: [
@@ -142,7 +147,7 @@ PROJECTS.forEach((p) => {
     el("ul", { class: "tags" }, p.stack.slice(0, 5).map((s) => el("li", { text: s }))),
     el("div", { class: "card-footer" }, [
       statusBadge(p),
-      el("span", { class: "note", text: "Click for details →" }),
+      el("span", { class: "note", text: p.video ? "▶ Watch the video →" : "Click for details →" }),
     ]),
   ]);
 
@@ -184,6 +189,17 @@ function openModal(p) {
     el("div", { class: "card-icon", text: p.icon, "aria-hidden": "true" }),
     el("h2", { id: "modalTitle", text: p.title }),
     el("span", { class: "subtitle note", text: p.subtitle }),
+    p.video
+      ? el("video", {
+          class: "modal-video",
+          src: p.video.src,
+          poster: p.video.poster,
+          controls: "",
+          preload: "none",
+          playsinline: "",
+          "aria-label": p.video.label,
+        })
+      : null,
     el("h4", { text: "The problem" }),
     el("p", { text: p.problem }),
     el("h4", { text: "What I built" }),
@@ -203,6 +219,7 @@ function openModal(p) {
 }
 
 function closeModal() {
+  $$("video", modal).forEach((v) => v.pause());
   modal.hidden = true;
   document.body.style.overflow = "";
   lastFocus?.focus();
