@@ -49,6 +49,11 @@ const PROJECTS = [
     categories: ["ai", "fullstack", "data"],
     stack: ["Next.js 16", "React 19", "TypeScript", "Convex", "Claude API", "Tailwind v4", "FastAPI"],
     liveUrl: "https://apas-pathway-tool.vercel.app",
+          video: {
+            src: "media/Pathr_Showcase_Video.mp4",
+            poster: "media/pathr-poster.jpg",
+            label: "Pathr showcase video",
+          },
     problem:
       "Program information is scattered across 27 institution websites, and newcomer and international students face language and requirement barriers.",
     highlights: [
