@@ -364,3 +364,11 @@ main { padding: 0 clamp(1rem, 5vw, 4rem); max-width: 1200px; margin: 0 auto; }
   .stats { gap: 2rem; }
   .modal-card { padding: 1.5rem; }
 }
+
+/* QR code blocks (industry night) */
+.qr-hero { display: flex; gap: 1.1rem; align-items: center; margin-top: 2rem; flex-wrap: wrap; }
+.qr-hero img, .qr-contact img { background: #ffffff; border-radius: 14px; padding: 8px; }
+.qr-text { margin: 0; line-height: 1.5; }
+.qr-url { font-family: "JetBrains Mono", monospace; font-size: 0.9em; opacity: 0.85; }
+.qr-contact { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; text-align: center; margin: 1.5rem 0 2rem; }
+.qr-contact .qr-text { text-align: center; }
