@@ -365,10 +365,19 @@ main { padding: 0 clamp(1rem, 5vw, 4rem); max-width: 1200px; margin: 0 auto; }
   .modal-card { padding: 1.5rem; }
 }
 
-/* QR code blocks (industry night) */
-.qr-hero { display: flex; gap: 1.1rem; align-items: center; margin-top: 2rem; flex-wrap: wrap; }
-.qr-hero img, .qr-contact img { background: #ffffff; border-radius: 14px; padding: 8px; }
-.qr-text { margin: 0; line-height: 1.5; }
-.qr-url { font-family: "JetBrains Mono", monospace; font-size: 0.9em; opacity: 0.85; }
+/* QR code blocks (industry night) — balanced hero layout */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) 330px; column-gap: 3.5rem; align-items: start; }
+.hero > * { grid-column: 1; min-width: 0; }
+.hero .qr-hero { grid-column: 2; grid-row: 1 / span 5; align-self: center; margin-top: 0; }
+.qr-hero { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.9rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.6rem 1.4rem; }
+.qr-hero img { background: #ffffff; border-radius: 14px; padding: 10px; width: 200px; height: 200px; }
+.qr-contact img { background: #ffffff; border-radius: 14px; padding: 8px; }
+.qr-text { margin: 0; line-height: 1.55; color: var(--muted); }
+.qr-text strong { color: var(--text); font-size: 1.08rem; }
+.qr-url { display: inline-block; margin-top: 0.55rem; padding: 0.3rem 0.75rem; border: 1px solid var(--border); border-radius: 999px; background: var(--bg-2); color: var(--text); font-family: var(--mono); font-size: 0.85rem; }
 .qr-contact { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; text-align: center; margin: 1.5rem 0 2rem; }
 .qr-contact .qr-text { text-align: center; }
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero .qr-hero { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 2rem; }
+}
