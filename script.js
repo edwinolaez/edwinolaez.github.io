@@ -43,7 +43,7 @@ const PROJECTS = [
     id: "pathr",
     icon: "🎓",
     title: "Pathr",
-    subtitle: "SAIT Capstone · for Apply Alberta",
+    subtitle: "SAIT - Emerging Trends Project",
     summary:
       "AI pathway advisor helping Alberta students discover, compare, and apply to programs across all 27 public post-secondary institutions, in 15 languages.",
     categories: ["ai", "fullstack", "data"],
