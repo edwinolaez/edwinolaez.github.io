@@ -381,3 +381,9 @@ main { padding: 0 clamp(1rem, 5vw, 4rem); max-width: 1200px; margin: 0 auto; }
   .hero { grid-template-columns: 1fr; }
   .hero .qr-hero { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 2rem; }
 }
+
+/* Connect cards (portfolio + LinkedIn) */
+.connect-row { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin: 1.5rem 0 2rem; }
+.connect-card { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; text-align: center; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.4rem 1.6rem; }
+.connect-card img { background: #ffffff; border-radius: 14px; padding: 8px; }
+.qr-link { font-family: var(--mono); font-size: 0.85rem; }
