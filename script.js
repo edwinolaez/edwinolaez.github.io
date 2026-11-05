@@ -68,7 +68,7 @@ const PROJECTS = [
     id: "bluepulse",
     icon: "🌊",
     title: "BluePulse AI",
-    subtitle: "Project Manager · QA & Security Lead",
+    subtitle: "Project Manager · QA & Security Lead · In partnership with SAIT Applied Research & Innovation Services (ARIS)",
     summary:
       "Post-wildfire environmental monitoring platform for the Athabasca watershed in Jasper National Park, with a live digital twin and AI analysis.",
     categories: ["ai", "fullstack", "data"],
