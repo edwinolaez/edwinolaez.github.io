@@ -23,7 +23,7 @@ const PROJECTS = [
       "AI-powered operations platform for independent quick-service restaurants: ML scheduling, training, hiring, inventory, and a daily AI briefing for GMs.",
     categories: ["ai", "data"],
     stack: ["Python", "scikit-learn", "pandas", "Streamlit", "Claude API", "Docker"],
-    liveUrl: "https://smart-schedule-optimizer-production.up.railway.app",
+    liveUrl: "https://relay-ops-demo-production.up.railway.app",
     video: {
       src: "media/relayops-journey.mp4",
       poster: "media/relayops-journey-poster.jpg",
