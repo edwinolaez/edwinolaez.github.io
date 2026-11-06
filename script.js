@@ -37,6 +37,7 @@ const PROJECTS = [
       "<strong>Schedule optimizer with 9 hard rules</strong>, min-hours guarantees, and a pay-period equity balancer",
       "<strong>Claude-powered daily briefing</strong> that digests all modules into plain language for the GM",
       "<strong>38 unit tests</strong> covering every scheduling rule",
+      "<strong>Help us build it right</strong>: run a restaurant, manage a team, or work the shifts? Please take our short questionnaire — <a href=\"https://forms.gle/cY7CD6w2ntdJm4tV6\" target=\"_blank\" rel=\"noopener noreferrer\">Owners &amp; managers (~12 min)</a> · <a href=\"https://forms.gle/ifwbEip5xdvyh4vm9\" target=\"_blank\" rel=\"noopener noreferrer\">Team members &amp; crew (~8 min)</a>",
     ],
   },
   {
