@@ -4,7 +4,7 @@
 // Config
 // ---------------------------------------------------------------------------
 const CONFIG = {
-  email: "edwin.olaez@edu.sait.ca",
+email: "edwinolaez02@gmail.com",
   github: "https://github.com/edwinolaez",
   // Create a free form at https://formspree.io and paste its ID (e.g. "xyzabcd").
   // Left empty, the contact form falls back to opening the visitor's email app.
