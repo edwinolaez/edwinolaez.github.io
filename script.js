@@ -85,6 +85,26 @@ const PROJECTS = [
       "<strong>Role-based access</strong> (Viewer → Analyst → Admin → Superadmin) and rate limiting via Kong",
     ],
   },
+  {
+    id: "founders-route",
+    icon: "🧭",
+    title: "Every Founder's Route",
+    subtitle: "Hope · Ingenuity · Discovery",
+    summary:
+      "Interactive route map for starting a business in Alberta, then scaling across Canada: 11 numbered stops from first idea to cross-country compliance, 12 funding programs, and guidance specific to your industry.",
+    categories: ["fullstack", "data"],
+    stack: ["HTML", "CSS", "JavaScript"],
+    liveUrl: "https://muse.ai/s/every-founder-s-route-ed70x0xaqyy1a/ggURu7W3OIobSE9E1HxWJKWN5u_ZEh46nCnC-uwbJf8",
+    problem:
+      "Government steps for starting a business are scattered across dozens of federal, provincial, and city pages, so new founders cannot see the cheapest, lowest-risk order to do things in.",
+    highlights: [
+      "<strong>11 stops, one route</strong>: plan, validate, structure, register, taxes, Calgary licence, free local help, then scaling across Canada",
+      "<strong>12 funding doors</strong>: Futurpreneur, BDC, CSBFP, PrairiesCan, CDAP, Alberta Innovates, the Innovation Employment Grant, and more",
+      "<strong>Industry picker</strong>: Food service, Professional consulting, Retail / e-commerce, Trades, and Tech / SaaS each swap in their own permits, licences, and rules",
+      "<strong>Provincial vs federal</strong>: a plain-language fork diagram on incorporation, extra-provincial registration, and sales tax in each province",
+      "<strong>Accessible by design</strong>: AA contrast, large tap targets, keyboard-friendly controls, and a layout that works on phones",
+    ],
+  },
 ];
 
 const FILTER_LABELS = { ai: "AI / ML", fullstack: "Full-Stack", data: "Data" };
