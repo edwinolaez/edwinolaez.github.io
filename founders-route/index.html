@@ -1,0 +1,926 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Every Founder's Route</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --paper: #EDEFE7;
+    --card: #F9FAF4;
+    --ink: #202E36;
+    --ink-soft: #55636A;
+    --local: #A4691F;
+    --local-soft: #F1E3CC;
+    --national: #1C6B74;
+    --national-soft: #D9EBEA;
+    --industry: #6B4C8A;
+    --industry-soft: #E8E0F0;
+    --line-muted: #C7CCC0;
+    --hair: #D8DCD1;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper: #141B1E;
+      --card: #1C262A;
+      --ink: #ECEFE9;
+      --ink-soft: #A6B2B0;
+      --local: #E3A458;
+      --local-soft: #362A16;
+      --national: #55B7BC;
+      --national-soft: #0E2F32;
+      --industry: #B48FD1;
+      --industry-soft: #2C2338;
+      --line-muted: #3C4644;
+      --hair: #2C3634;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: #141B1E;
+    --card: #1C262A;
+    --ink: #ECEFE9;
+    --ink-soft: #A6B2B0;
+    --local: #E3A458;
+    --local-soft: #362A16;
+    --national: #55B7BC;
+    --national-soft: #0E2F32;
+    --industry: #B48FD1;
+    --industry-soft: #2C2338;
+    --line-muted: #3C4644;
+    --hair: #2C3634;
+  }
+
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+    padding-inline:20px;
+    padding-block:44px 56px;
+  }
+  .wrap{ max-width:760px; margin:0 auto; }
+
+  .kicker{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:12.5px;
+    letter-spacing:.09em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+  }
+  h1{
+    font-family:"Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight:800;
+    font-size:clamp(2.6rem, 8vw, 4rem);
+    line-height:.94;
+    letter-spacing:-.01em;
+    text-wrap:balance;
+    margin:0 0 14px;
+  }
+  .subtitle{
+    font-size:1.05rem;
+    line-height:1.55;
+    color:var(--ink-soft);
+    max-width:60ch;
+    margin:0 0 18px;
+  }
+
+  .disclaimer{
+    font-size:.86rem;
+    line-height:1.55;
+    color:var(--ink-soft);
+    background:var(--card);
+    border:1px solid var(--hair);
+    border-radius:8px;
+    padding:12px 14px;
+    max-width:60ch;
+    margin:0 0 28px;
+  }
+  .disclaimer b{ color:var(--ink); }
+
+  .legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 22px;
+    padding-block:16px;
+    border-top:1px solid var(--hair);
+    margin-bottom:24px;
+  }
+  .legend-item{
+    display:flex;
+    align-items:center;
+    gap:9px;
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:12.5px;
+    letter-spacing:.03em;
+    color:var(--ink-soft);
+  }
+  .legend .swatch{ width:13px; height:13px; flex:none; }
+  .legend .swatch.round{ border-radius:999px; }
+  .legend .swatch.diamond{ border-radius:3px; transform:rotate(45deg); }
+  .legend .local .swatch{ background:var(--local); }
+  .legend .national .swatch{ background:var(--national); }
+  .legend .industry-legend .swatch{ background:var(--industry); }
+
+  .picker{
+    border:none;
+    padding:0;
+    margin:0 0 40px;
+  }
+  .picker legend{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:12.5px;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding:0 0 12px;
+  }
+  .pills{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .pill{ position:relative; }
+  .pill input{
+    position:absolute;
+    opacity:0;
+    width:100%; height:100%;
+    margin:0;
+    cursor:pointer;
+  }
+  .pill span{
+    display:inline-flex;
+    align-items:center;
+    padding:8px 14px;
+    border-radius:999px;
+    border:1.5px solid var(--line-muted);
+    font-size:.88rem;
+    color:var(--ink-soft);
+    background:var(--card);
+    transition:border-color .15s, color .15s, background .15s;
+  }
+  .pill input:checked + span{
+    border-color:var(--industry);
+    color:var(--industry);
+    background:var(--industry-soft);
+    font-weight:600;
+  }
+  .pill input:focus-visible + span{
+    outline:2px solid var(--industry);
+    outline-offset:2px;
+  }
+
+  .segment{ list-style:none; margin:0; padding:0; position:relative; }
+  .segment::before{
+    content:"";
+    position:absolute;
+    left:19px; top:22px; bottom:22px;
+    width:2px;
+    background:var(--seg-color);
+    opacity:.4;
+  }
+  .segment.local{ --seg-color:var(--local); }
+  .segment.national{ --seg-color:var(--national); }
+
+  .stop{
+    position:relative;
+    display:grid;
+    grid-template-columns:40px 1fr;
+    gap:18px;
+    padding-block:22px;
+  }
+  .marker{
+    position:relative; z-index:1;
+    width:40px; height:40px;
+    border-radius:999px;
+    background:var(--card);
+    border:2px solid var(--seg-color);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-weight:600; font-size:14px;
+    font-variant-numeric:tabular-nums;
+    color:var(--seg-color);
+  }
+  .stop-body{ padding-top:2px; }
+  .stop-title{
+    font-family:"Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight:700; font-size:1.5rem; line-height:1.08;
+    margin:0 0 6px; letter-spacing:-.005em;
+  }
+  .stop-desc{ font-size:.97rem; line-height:1.5; color:var(--ink-soft); max-width:56ch; margin:0 0 10px; }
+  .chip{
+    display:inline-block;
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:12px; font-variant-numeric:tabular-nums;
+    padding:4px 10px; border-radius:5px;
+    background:var(--chip-bg); color:var(--chip-fg);
+    border:1px solid var(--chip-fg);
+  }
+  .local .chip{ --chip-bg:var(--local-soft); --chip-fg:var(--local); }
+  .national .chip{ --chip-bg:var(--national-soft); --chip-fg:var(--national); }
+  .industry-chip{ --chip-bg:var(--industry-soft); --chip-fg:var(--industry); }
+
+  .flag{
+    margin-top:12px; padding:12px 14px;
+    border:1.5px dashed var(--ink-soft); border-radius:8px;
+    font-size:.92rem; line-height:1.5; color:var(--ink); max-width:56ch;
+  }
+  .flag b{ font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.78rem; letter-spacing:.04em; text-transform:uppercase; display:block; margin-bottom:4px; color:var(--ink-soft); }
+
+  figure.fork{ margin:6px 0 18px; display:flex; flex-direction:column; align-items:center; text-align:center; }
+  figure.fork svg{ width:min(360px, 100%); height:auto; color:var(--ink-soft); }
+  figure.fork .branch-local{ color:var(--local); }
+  figure.fork .branch-national{ color:var(--national); }
+  figcaption{ max-width:46ch; font-size:.88rem; line-height:1.5; color:var(--ink-soft); margin-top:10px; }
+
+  /* ---- Industry-specific block ---- */
+  .industry-section{
+    margin:8px 0 40px;
+    padding:24px;
+    border-radius:12px;
+    background:var(--industry-soft);
+    border:1px solid var(--industry);
+  }
+  .industry-section-head{
+    display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap;
+    margin-bottom:6px;
+  }
+  .industry-section-title{
+    font-family:"Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight:700; font-size:1.3rem; color:var(--industry); margin:0;
+  }
+  .industry-section-note{ font-size:.86rem; color:var(--ink-soft); margin:0 0 18px; max-width:56ch; }
+
+  [data-show]{ display:none; }
+  body[data-industry="foodservice"] [data-show="foodservice"],
+  body[data-industry="consulting"] [data-show="consulting"],
+  body[data-industry="retail"] [data-show="retail"],
+  body[data-industry="trades"] [data-show="trades"],
+  body[data-industry="tech"] [data-show="tech"],
+  body:not([data-industry]) [data-show="none"],
+  body[data-industry=""] [data-show="none"]{ display:block; }
+
+  .ind-stop{ display:grid; grid-template-columns:36px 1fr; gap:16px; padding-block:14px; }
+  .ind-stop + .ind-stop{ border-top:1px dashed var(--line-muted); }
+  .ind-marker{
+    width:32px; height:32px; margin-top:2px;
+    background:var(--industry); color:var(--card);
+    border-radius:6px; transform:rotate(45deg);
+    display:flex; align-items:center; justify-content:center;
+    font-family:"IBM Plex Mono", ui-monospace, monospace; font-weight:600; font-size:13px;
+  }
+  .ind-marker span{ transform:rotate(-45deg); }
+  .ind-title{ font-weight:600; font-size:1.02rem; margin:0 0 4px; }
+  .ind-desc{ font-size:.93rem; line-height:1.5; color:var(--ink-soft); max-width:56ch; margin:0 0 8px; }
+
+  .bizpal-link{
+    display:inline-flex; align-items:center; gap:6px;
+    margin-top:6px;
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:12.5px; color:var(--industry);
+    text-decoration:none; border-bottom:1px solid var(--industry);
+  }
+  .bizpal-link:hover{ opacity:.75; }
+
+  .trade-addendum{
+    margin-top:14px; padding:12px 14px;
+    border-radius:8px; background:var(--industry-soft); border:1px solid var(--industry);
+    font-size:.9rem; line-height:1.5; color:var(--ink); max-width:56ch;
+  }
+  .trade-addendum b{ font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:.76rem; letter-spacing:.04em; text-transform:uppercase; display:block; margin-bottom:4px; color:var(--industry); }
+
+  /* ---- Funding & capital ---- */
+  .funding-section{ margin:8px 0 40px; }
+  .funding-head{ margin-bottom:6px; }
+  .funding-title{
+    font-family:"Big Shoulders Display", ui-sans-serif, sans-serif;
+    font-weight:700; font-size:1.6rem; margin:0 0 6px;
+  }
+  .funding-note{ font-size:.92rem; line-height:1.5; color:var(--ink-soft); max-width:58ch; margin:0 0 26px; }
+
+  .fund-group{ margin-bottom:26px; }
+  .fund-group-title{
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:12px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--ink-soft); margin:0 0 12px;
+    padding-bottom:8px; border-bottom:1px solid var(--hair);
+  }
+  .fund-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(230px, 1fr));
+    gap:12px;
+  }
+  .fund-card{
+    background:var(--card);
+    border:1px solid var(--hair);
+    border-radius:10px;
+    padding:16px;
+    display:flex; flex-direction:column; gap:6px;
+  }
+  .fund-name{ font-weight:600; font-size:.98rem; margin:0; }
+  .fund-desc{ font-size:.87rem; line-height:1.45; color:var(--ink-soft); margin:0; flex:1; }
+  .fund-chip{
+    align-self:flex-start;
+    font-family:"IBM Plex Mono", ui-monospace, monospace;
+    font-size:11px; padding:3px 8px; border-radius:5px;
+    background:var(--paper); color:var(--ink-soft); border:1px solid var(--line-muted);
+  }
+  .fund-link{ font-size:.85rem; color:var(--ink); text-decoration:none; border-bottom:1px solid var(--ink-soft); align-self:flex-start; }
+  .fund-link:hover{ opacity:.7; }
+
+  .fund-more{
+    margin-top:8px; padding:18px 20px;
+    border:1.5px dashed var(--ink-soft); border-radius:10px;
+  }
+  .fund-more-title{ font-weight:600; font-size:1rem; margin:0 0 6px; }
+  .fund-more-desc{ font-size:.88rem; line-height:1.5; color:var(--ink-soft); max-width:60ch; margin:0 0 10px; }
+  .fund-more .fund-link{ font-family:"IBM Plex Mono", ui-monospace, monospace; font-size:12.5px; }
+
+  footer{ margin-top:48px; padding-top:22px; border-top:1px solid var(--hair); }
+  .attribution{ font-size:.95rem; color:var(--ink); margin:0 0 14px; }
+  .sources{ font-size:.82rem; line-height:1.7; color:var(--ink-soft); }
+  .sources a{ color:var(--ink-soft); }
+  .sources a:visited{ color:var(--ink-soft); }
+
+  @media (max-width:480px){
+    .stop{ grid-template-columns:32px 1fr; gap:12px; }
+    .marker{ width:32px; height:32px; font-size:12px; }
+    .segment::before{ left:15px; }
+  }
+</style>
+
+<div class="wrap">
+
+  <p class="kicker">Interactive Route Map — Small Business Registration in Canada</p>
+  <h1>Every Founder's Route</h1>
+  <p class="subtitle">Pick your industry to see what's specific to you, layered onto the same path every
+    founder walks — from a first registration in Calgary to operating across Canada.</p>
+
+  <p class="disclaimer"><b>This is an independent prototype, not official guidance.</b> It's built to be
+    useful and accurate, sourced from official government pages as of September 2026, but it's one
+    founder's project, not a government service. Verify specifics for your situation against the linked
+    sources or <a href="https://bizpal.ca/" style="color:inherit">BizPaL</a> before acting on them. It's
+    currently deep on Alberta only — other provinces are next.</p>
+
+  <fieldset class="picker">
+    <legend>Select your industry</legend>
+    <div class="pills" id="industryPicker">
+      <label class="pill"><input type="radio" name="industry" value="none" checked><span>General / not sure</span></label>
+      <label class="pill"><input type="radio" name="industry" value="foodservice"><span>Food service / QSR</span></label>
+      <label class="pill"><input type="radio" name="industry" value="consulting"><span>Professional / consulting</span></label>
+      <label class="pill"><input type="radio" name="industry" value="retail"><span>Retail / e-commerce</span></label>
+      <label class="pill"><input type="radio" name="industry" value="trades"><span>Trades</span></label>
+      <label class="pill"><input type="radio" name="industry" value="tech"><span>Tech / SaaS</span></label>
+    </div>
+  </fieldset>
+
+  <div class="legend">
+    <span class="legend-item local"><span class="swatch round"></span>Building the foundation in Alberta</span>
+    <span class="legend-item national"><span class="swatch round"></span>Scaling across Canada</span>
+    <span class="legend-item industry-legend"><span class="swatch diamond"></span>Specific to your industry</span>
+  </div>
+
+  <ol class="segment local">
+    <li class="stop local">
+      <span class="marker">0</span>
+      <div class="stop-body">
+        <h2 class="stop-title">Plan before you validate</h2>
+        <p class="stop-desc">Turn the idea into a real business model, write an actual business plan, and
+          pull basic research on your target customer and location — the groundwork canada.ca's own
+          planning guide starts with, before any registration step.</p>
+        <span class="chip">free BDC business plan template</span>
+        <div><a class="bizpal-link" href="https://www.canada.ca/en/services/business/start/planning.html" target="_blank" rel="noopener">See the full planning guide on canada.ca →</a></div>
+      </div>
+    </li>
+    <li class="stop local">
+      <span class="marker">1</span>
+      <div class="stop-body">
+        <h2 class="stop-title">Validate &amp; search</h2>
+        <p class="stop-desc">Confirm the idea and check the name is actually free — a Business Name Report /
+          NUANS search — before filing anything.</p>
+        <span class="chip">do this before spending a dollar</span>
+        <div><a class="bizpal-link" href="https://www.alberta.ca/register-business-name" target="_blank" rel="noopener">Alberta.ca — Register a Business Name →</a></div>
+      </div>
+    </li>
+    <li class="stop local">
+      <span class="marker">2</span>
+      <div class="stop-body">
+        <h2 class="stop-title">Choose a structure</h2>
+        <p class="stop-desc">Sole proprietorship, partnership, or provincial corporation — decided by
+          liability exposure and whether you'll raise money or hire.</p>
+        <span class="chip">corporation = liability shield</span>
+        <div><a class="bizpal-link" href="https://www.bdc.ca/en/articles-tools/start-buy-business/start-business/advantages-different-business-structures" target="_blank" rel="noopener">BDC — Choosing Your Business Structure →</a></div>
+      </div>
+    </li>
+    <li class="stop local">
+      <span class="marker">3</span>
+      <div class="stop-body">
+        <h2 class="stop-title">Register with Alberta</h2>
+        <p class="stop-desc">Filed through an authorized Corporate Registry service provider — Alberta doesn't
+          register businesses directly at a government counter.</p>
+        <span class="chip">≈ $275 provincial filing fee</span>
+        <div><a class="bizpal-link" href="https://www.alberta.ca/find-business-registry" target="_blank" rel="noopener">Alberta.ca — Find a Business Registry →</a></div>
+      </div>
+    </li>
+    <li class="stop local">
+      <span class="marker">4</span>
+      <div class="stop-body">
+        <h2 class="stop-title">Get a CRA business number</h2>
+        <p class="stop-desc">Registers the business for federal tax accounts; GST/HST becomes mandatory once
+          trailing four-quarter revenue crosses the small-supplier line.</p>
+        <span class="chip">$30,000 GST/HST threshold</span>
+        <div><a class="bizpal-link" href="https://www.canada.ca/en/services/taxes/resources-for-small-and-medium-businesses/business-number-registration.html" target="_blank" rel="noopener">CRA — Business Number Registration →</a></div>
+      </div>
+    </li>
+    <li class="stop local">
+      <span class="marker">5</span>
+      <div class="stop-body">
+        <h2 class="stop-title">License with the City of Calgary</h2>
+        <p class="stop-desc">Applied through a myID account; most home-based businesses qualify for automatic
+          approval under the Class 1 home occupation rules.</p>
+        <span class="chip">myID → "Start a New Business"</span>
+        <div><a class="bizpal-link" href="https://www.calgary.ca/for-business/getting-started.html" target="_blank" rel="noopener">calgary.ca — Getting Started →</a></div>
+        <div><a class="bizpal-link" href="https://bizpal.ca/" target="_blank" rel="noopener">Generate your full permit checklist on BizPaL →</a></div>
+      </div>
+    </li>
+    <li class="stop local">
+      <span class="marker">6</span>
+      <div class="stop-body">
+        <h2 class="stop-title">Use local support</h2>
+        <p class="stop-desc">Business Link Alberta and Platform Calgary offer free advising; Alberta Innovates
+          funds R&amp;D-heavy ventures through grants like the Innovation Employment Grant.</p>
+        <span class="chip">free advising, before you spend</span>
+        <div><a class="bizpal-link" href="https://businesslink.ca/" target="_blank" rel="noopener">Business Link Alberta →</a></div>
+      </div>
+    </li>
+  </ol>
+
+  <div class="funding-section">
+    <div class="funding-head">
+      <h2 class="funding-title">Funding &amp; capital you can apply for</h2>
+    </div>
+    <p class="funding-note">Not another sequential stop — tap these whenever they're relevant, from your
+      first grant application through to scaling nationally. Amounts and eligibility change; confirm current
+      details on each program's own page before applying.</p>
+
+    <div class="fund-group">
+      <p class="fund-group-title">Grants &amp; non-repayable funding</p>
+      <div class="fund-grid">
+        <div class="fund-card">
+          <p class="fund-name">Innovation Employment Grant</p>
+          <p class="fund-desc">Covers up to 20% of qualifying R&amp;D spending for Alberta-based companies.</p>
+          <span class="fund-chip">Alberta, R&amp;D spend</span>
+          <a class="fund-link" href="https://www.alberta.ca/small-business-resources" target="_blank" rel="noopener">Alberta.ca →</a>
+        </div>
+        <div class="fund-card">
+          <p class="fund-name">Canada-Alberta Job Grant</p>
+          <p class="fund-desc">Reimburses 50–75% of employee training costs, typically $5,000–$10,000 per
+            employee.</p>
+          <span class="fund-chip">training costs</span>
+          <a class="fund-link" href="https://www.alberta.ca/small-business-resources" target="_blank" rel="noopener">Alberta.ca →</a>
+        </div>
+        <div class="fund-card">
+          <p class="fund-name">SR&amp;ED Tax Incentive</p>
+          <p class="fund-desc">Refunds a share of R&amp;D spending for Canadian-controlled private
+            corporations under $25M revenue — see the Tech/SaaS panel above for detail.</p>
+          <span class="fund-chip">CCPC, &lt;$25M revenue</span>
+          <a class="fund-link" href="https://www.canada.ca/content/canadasite/en/revenue-agency/services/scientific-research-experimental-development-tax-incentive-program/apply-pre-claim-approval.html" target="_blank" rel="noopener">CRA →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fund-group">
+      <p class="fund-group-title">Loans &amp; financing</p>
+      <div class="fund-grid">
+        <div class="fund-card">
+          <p class="fund-name">Futurpreneur Canada</p>
+          <p class="fund-desc">Loans up to $75,000 plus mentoring, for founders aged 18–39.</p>
+          <span class="fund-chip">ages 18–39</span>
+          <a class="fund-link" href="https://www.alberta.ca/small-business-resources" target="_blank" rel="noopener">Alberta.ca →</a>
+        </div>
+        <div class="fund-card">
+          <p class="fund-name">BDC Small Business Loan</p>
+          <p class="fund-desc">Up to $350,000 from the federal business bank; accepts newer businesses that
+            traditional lenders often turn down.</p>
+          <span class="fund-chip">newer businesses OK</span>
+          <a class="fund-link" href="https://www.bdc.ca/" target="_blank" rel="noopener">BDC →</a>
+        </div>
+        <div class="fund-card">
+          <p class="fund-name">Canada Small Business Financing Program</p>
+          <p class="fund-desc">Government-guaranteed loans up to $1.15M, arranged through your own bank or
+            credit union.</p>
+          <span class="fund-chip">via your bank, up to $1.15M</span>
+          <a class="fund-link" href="https://ised-isde.canada.ca/site/canada-small-business-financing-program/en" target="_blank" rel="noopener">ISED →</a>
+        </div>
+        <div class="fund-card">
+          <p class="fund-name">Community Futures Alberta</p>
+          <p class="fund-desc">Financing for businesses outside major urban centres, through 27 Alberta
+            offices.</p>
+          <span class="fund-chip">rural &amp; small-town AB</span>
+          <a class="fund-link" href="https://www.alberta.ca/small-business-resources" target="_blank" rel="noopener">Alberta.ca →</a>
+        </div>
+        <div class="fund-card">
+          <p class="fund-name">PrairiesCan Scale-Up Funding</p>
+          <p class="fund-desc">$200,000–$20,000,000 in cost-shared funding for growth-stage companies in
+            Alberta, Saskatchewan, and Manitoba.</p>
+          <span class="fund-chip">growth-stage, $200K+</span>
+          <a class="fund-link" href="https://www.canada.ca/en/prairies-economic-development.html" target="_blank" rel="noopener">PrairiesCan →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fund-group">
+      <p class="fund-group-title">Advisory, ecosystem &amp; networks</p>
+      <div class="fund-grid">
+        <div class="fund-card">
+          <p class="fund-name">Business Link Alberta</p>
+          <p class="fund-desc">Free one-on-one advising and market research for any Alberta founder.</p>
+          <span class="fund-chip">free, any stage</span>
+          <a class="fund-link" href="https://businesslink.ca/" target="_blank" rel="noopener">Business Link →</a>
+        </div>
+        <div class="fund-card">
+          <p class="fund-name">Platform Calgary</p>
+          <p class="fund-desc">Calgary's tech hub: pre-accelerator, incubator, and investor connections.</p>
+          <span class="fund-chip">Calgary tech/innovation</span>
+          <a class="fund-link" href="https://www.platformcalgary.com/" target="_blank" rel="noopener">Platform Calgary →</a>
+        </div>
+        <div class="fund-card">
+          <p class="fund-name">ATB Entrepreneur Centre</p>
+          <p class="fund-desc">Funding connections, advice, and business networking.</p>
+          <span class="fund-chip">advice + connections</span>
+          <a class="fund-link" href="https://www.alberta.ca/small-business-resources" target="_blank" rel="noopener">Alberta.ca →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fund-group">
+      <p class="fund-group-title">Support for diverse entrepreneurship</p>
+      <div class="fund-grid">
+        <div class="fund-card">
+          <p class="fund-name">Women Entrepreneurship Loan Fund</p>
+          <p class="fund-desc">Up to $50,000 for startup, scaling, or entering international markets, for
+            women-owned or women-led businesses.</p>
+          <span class="fund-chip">women-owned / -led</span>
+          <a class="fund-link" href="https://ised-isde.canada.ca/site/ised/en/programs-and-initiatives/women-entrepreneurship-strategy" target="_blank" rel="noopener">ISED →</a>
+        </div>
+        <div class="fund-card">
+          <p class="fund-name">WES Ecosystem Fund</p>
+          <p class="fund-desc">Training, mentorship, and networking for women entrepreneurs, part of Canada's
+            nearly $7B Women Entrepreneurship Strategy.</p>
+          <span class="fund-chip">women entrepreneurs</span>
+          <a class="fund-link" href="https://ised-isde.canada.ca/site/ised/en/programs-and-initiatives/women-entrepreneurship-strategy" target="_blank" rel="noopener">ISED →</a>
+        </div>
+        <div class="fund-card">
+          <p class="fund-name">Black Entrepreneurship Loan Fund</p>
+          <p class="fund-desc">A $160M partnership between the federal government, Black-led business
+            organizations, and BDC — loans up to $250,000 for Black-led businesses (majority Black
+            ownership).</p>
+          <span class="fund-chip">Black-led, up to $250K</span>
+          <a class="fund-link" href="https://ised-isde.canada.ca/site/ised/en/programs-and-initiatives/black-entrepreneurship-program" target="_blank" rel="noopener">ISED →</a>
+        </div>
+        <div class="fund-card">
+          <p class="fund-name">2SLGBTQI+ Entrepreneurship Program</p>
+          <p class="fund-desc">Canada's first dedicated 2SLGBTQI+ program ($25M): mentorship, procurement and
+            export readiness, and ecosystem grants via the Canadian Queer Chamber of Commerce. Funding calls
+            open in rounds — check current status before applying.</p>
+          <span class="fund-chip">check current round</span>
+          <a class="fund-link" href="https://ised-isde.canada.ca/site/ised/en/programs-and-initiatives/2slgbtqi-entrepreneurship-program" target="_blank" rel="noopener">ISED →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="fund-more">
+      <p class="fund-more-title">Want to search all 1,500+ federal supports yourself?</p>
+      <p class="fund-more-desc">These cards are a curated starting point. Innovation Canada's <b>Business
+        Benefits Finder</b> asks a few questions about your business and returns every matching federal
+        grant, loan, tax credit, and wage subsidy — the same official tool this section draws from.</p>
+      <a class="fund-link" href="https://innovation.canada.ca/innovation/s/?language=en_CA" target="_blank" rel="noopener">Open Business Benefits Finder →</a>
+    </div>
+  </div>
+
+  <div class="industry-section">
+    <div class="industry-section-head">
+      <h2 class="industry-section-title">Specific to your industry</h2>
+    </div>
+    <p class="industry-section-note">Layered onto Stops 5–6, after you've planned and registered — usually the
+      same window when you're finalizing licensing before opening.</p>
+
+    <div data-show="none">
+      <div class="ind-stop">
+        <span class="ind-marker"><span>·</span></span>
+        <div>
+          <p class="ind-title">Pick an industry above to see what's specific to you</p>
+          <p class="ind-desc">Every industry adds its own layer on top of the base path — regulated
+            professions, food safety, trade certification, and so on. If yours isn't listed yet, BizPaL's
+            own wizard can generate a permit checklist for any business activity.</p>
+          <a class="bizpal-link" href="https://bizpal.ca/" target="_blank" rel="noopener">Check BizPaL for your specific activity →</a>
+        </div>
+      </div>
+    </div>
+
+    <div data-show="foodservice">
+      <div class="ind-stop">
+        <span class="ind-marker"><span>A</span></span>
+        <div><p class="ind-title">Submit food premises plans for review</p>
+          <p class="ind-desc">At least 6 weeks before construction begins, through the city's planning
+            department or Alberta Health Services Environmental Public Health.</p>
+          <span class="chip industry-chip">6-week lead time</span>
+          <div><a class="bizpal-link" href="https://www.albertahealthservices.ca/assets/wf/eph/wf-eph-start-food-business.pdf" target="_blank" rel="noopener">AHS — Starting a Food Business →</a></div></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>B</span></span>
+        <div><p class="ind-title">Get certified in food safety</p>
+          <p class="ind-desc">At least one person in care and control of the facility needs food handler
+            certification; a certified person must stay on-site continuously once 6+ staff work a shift.</p>
+          <span class="chip industry-chip">≥1 certified handler</span>
+          <div><a class="bizpal-link" href="https://www.albertahealthservices.ca/assets/wf/eph/wf-eph-start-food-business.pdf" target="_blank" rel="noopener">AHS — Starting a Food Business →</a></div></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>C</span></span>
+        <div><p class="ind-title">Apply for your Food Handling Permit</p>
+          <p class="ind-desc">Apply once construction and equipment are done, at least 7 days before opening
+            — AHS schedules an inspection within 7 business days.</p>
+          <span class="chip industry-chip">$100–$500/yr by class</span>
+          <div><a class="bizpal-link" href="https://www.albertahealthservices.ca/assets/wf/eph/wf-eph-start-food-business.pdf" target="_blank" rel="noopener">AHS — Starting a Food Business →</a></div></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>D</span></span>
+        <div><p class="ind-title">Serving alcohol? Apply for an AGLC liquor licence</p>
+          <p class="ind-desc">Class A covers a restaurant where food is the primary business; every director,
+            shareholder, and manager needs a recent criminal record check.</p>
+          <span class="chip industry-chip">AGLC Class A (if applicable)</span>
+          <div><a class="bizpal-link" href="https://aglc.ca/liquor/liquor-licences/apply-liquor-licence" target="_blank" rel="noopener">AGLC — Apply for a Liquor Licence →</a></div></div>
+      </div>
+      <a class="bizpal-link" href="https://bizpal.ca/" target="_blank" rel="noopener">Confirm every permit for your concept on BizPaL →</a>
+    </div>
+
+    <div data-show="consulting">
+      <div class="ind-stop">
+        <span class="ind-marker"><span>A</span></span>
+        <div><p class="ind-title">Check if your profession is regulated</p>
+          <p class="ind-desc">Accountants, engineers, and similar professions need a licence from their own
+            regulatory body before practicing independently — separate from business registration.</p>
+          <span class="chip industry-chip">check your regulator first</span>
+          <div><a class="bizpal-link" href="https://www.alberta.ca/regulatory-bodies" target="_blank" rel="noopener">Alberta.ca — Regulatory Bodies →</a></div></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>B</span></span>
+        <div><p class="ind-title">Consider errors &amp; omissions insurance</p>
+          <p class="ind-desc">Most consultants carry liability coverage before signing their first client
+            contract — it protects you, not just the client. General risk-management practice, not a legal
+            requirement — no single official source to link here, so talk to a broker about what your work
+            actually needs.</p>
+          <span class="chip industry-chip">general practice, not mandated</span></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>C</span></span>
+        <div><p class="ind-title">Register for GST/HST early</p>
+          <p class="ind-desc">Many B2B clients expect an invoice with GST/HST included, even before you're
+            legally required to charge it.</p>
+          <span class="chip industry-chip">clients often expect it</span>
+          <div><a class="bizpal-link" href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/when-register-charge.html" target="_blank" rel="noopener">CRA — When to Register for GST/HST →</a></div></div>
+      </div>
+      <a class="bizpal-link" href="https://bizpal.ca/" target="_blank" rel="noopener">Check BizPaL for your specific service →</a>
+    </div>
+
+    <div data-show="retail">
+      <div class="ind-stop">
+        <span class="ind-marker"><span>A</span></span>
+        <div><p class="ind-title">Confirm your zoning and space</p>
+          <p class="ind-desc">Same Development Permit / Tenancy Change process as any storefront — or none at
+            all if you're online-only. <a href="https://www.calgary.ca/for-business/getting-started.html" target="_blank" rel="noopener">The City of Calgary — Getting started →</a></p>
+          <span class="chip industry-chip">storefront only</span></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>B</span></span>
+        <div><p class="ind-title">Track where you have tax obligations</p>
+          <p class="ind-desc">Selling to customers in other provinces can trigger obligations to collect that
+            province's sales tax — this connects to Stop 9 as you grow. <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA — GST/HST rates by province →</a></p>
+          <span class="chip industry-chip">ties to Stop 9</span></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>C</span></span>
+        <div><p class="ind-title">Set up compliant payment processing</p>
+          <p class="ind-desc">Most payment processors require basic PCI-DSS compliance before they'll process
+            cards for you. That's a private card-network standard, not a Canadian government requirement — no
+            official source to link here, so it's a conversation with your processor.</p>
+          <span class="chip industry-chip">industry standard, not law</span></div>
+      </div>
+      <a class="bizpal-link" href="https://bizpal.ca/" target="_blank" rel="noopener">Check BizPaL for your specific goods →</a>
+    </div>
+
+    <div data-show="trades">
+      <div class="ind-stop">
+        <span class="ind-marker"><span>A</span></span>
+        <div><p class="ind-title">Get your trade certification</p>
+          <p class="ind-desc">Skilled Trades Alberta certifies most trades; Red Seal endorsement (39 trades in
+            Alberta) is recognized nationally without retesting. <a href="https://tradesecrets.alberta.ca/become-certified/interprovincial-red-seal/" target="_blank" rel="noopener">Tradesecrets Alberta — Red Seal →</a></p>
+          <span class="chip industry-chip">Red Seal = national recognition</span></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>B</span></span>
+        <div><p class="ind-title">Check your WCB coverage</p>
+          <p class="ind-desc">Not automatically mandatory — WCB applies a "business test" to contractors and
+            subcontractors. Pass it and you can carry your own WCB account; fail it and the principal who hired
+            you becomes responsible for your coverage instead. Worth confirming which side of that line you're
+            on before you take on work. <a href="https://www.wcb.ab.ca/insurance-and-premiums/types-of-coverage/coverage-for-contractors-and-subcontractors.html" target="_blank" rel="noopener">WCB Alberta — Coverage for contractors →</a></p>
+          <span class="chip industry-chip">depends on the "business test"</span></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>C</span></span>
+        <div><p class="ind-title">Pull a permit for every job</p>
+          <p class="ind-desc">Electrical, plumbing, and building permits are typically per-project, on top of
+            your general business licence. <a href="https://www.calgary.ca/for-business/getting-started.html" target="_blank" rel="noopener">The City of Calgary — Getting started →</a></p>
+          <span class="chip industry-chip">per project, not one-time</span></div>
+      </div>
+      <a class="bizpal-link" href="https://bizpal.ca/" target="_blank" rel="noopener">Check BizPaL for your specific trade →</a>
+    </div>
+
+    <div data-show="tech">
+      <div class="ind-stop">
+        <span class="ind-marker"><span>A</span></span>
+        <div><p class="ind-title">Protect your name and IP</p>
+          <p class="ind-desc">Trademark registration through CIPO (≈$491 government fee for the first class)
+            and basic IP hygiene — like assignment clauses with contractors — matter earlier than most
+            founders expect. <a href="https://ised-isde.canada.ca/site/canadian-intellectual-property-office/en/trademarks/registration-and-renewal-trademarks" target="_blank" rel="noopener">CIPO — Trademark registration →</a></p>
+          <span class="chip industry-chip">≈$491 CIPO filing fee</span></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>B</span></span>
+        <div><p class="ind-title">Look into SR&amp;ED</p>
+          <p class="ind-desc">The federal SR&amp;ED tax incentive can refund a meaningful share of R&amp;D
+            spending for Canadian-controlled private corporations under $25M in revenue. <a href="https://www.canada.ca/content/canadasite/en/revenue-agency/services/scientific-research-experimental-development-tax-incentive-program/apply-pre-claim-approval.html" target="_blank" rel="noopener">CRA — SR&amp;ED pre-claim approval →</a></p>
+          <span class="chip industry-chip">CCPC, &lt;$25M revenue</span></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>C</span></span>
+        <div><p class="ind-title">Handle customer data under PIPEDA</p>
+          <p class="ind-desc">Get real consent for what you collect, use it only for what you said, and
+            secure it — this applies from the moment you handle personal data commercially, not just once
+            you're big. <a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief/" target="_blank" rel="noopener">OPC — PIPEDA in brief →</a></p>
+          <span class="chip industry-chip">applies from day one</span></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>D</span></span>
+        <div><p class="ind-title">Build your own AI literacy</p>
+          <p class="ind-desc">If you're building with or on AI, the federal government funds free courses for
+            founders, not just developers — covering the basics of how these systems actually work, not just
+            how to use them. <a href="https://ised-isde.canada.ca/site/ised/en/ai-literacy-building-knowledge-and-skills-canadians" target="_blank" rel="noopener">ISED — AI Literacy: Building Knowledge and Skills for Canadians →</a></p>
+          <span class="chip industry-chip">free, via Amii</span></div>
+      </div>
+      <div class="ind-stop">
+        <span class="ind-marker"><span>E</span></span>
+        <div><p class="ind-title">Know what's behind Canada's AI strategy</p>
+          <p class="ind-desc">"AI for All" is the federal government's national AI strategy, and it's backed
+            by real capital for founders — a $500M Canadian Tech Growth Fund, a $700M Compute Access Fund
+            expansion for affordable compute, and BDC's $500M LIFT program for AI tool adoption, among others.
+            Worth reading before you assume Canada has nothing to offer past the SR&amp;ED credit.
+            <a href="https://ised-isde.canada.ca/site/ised/en/canadas-national-artificial-intelligence-strategy-ai-all" target="_blank" rel="noopener">ISED — Canada's National AI Strategy: AI for All →</a></p>
+          <span class="chip industry-chip">$500M+ in AI-specific capital</span></div>
+      </div>
+      <a class="bizpal-link" href="https://bizpal.ca/" target="_blank" rel="noopener">Check BizPaL for your specific activity →</a>
+    </div>
+  </div>
+
+  <figure class="fork">
+    <svg viewBox="0 0 360 210" role="img" aria-label="Diagram: after Alberta registration, a business chooses between staying provincial or incorporating federally, but both paths converge on the same requirement — registering again in every new province.">
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+          <path d="M0,0 L8,4 L0,8 Z" fill="currentColor"/>
+        </marker>
+      </defs>
+      <path d="M180,4 L180,38" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path class="branch-local" d="M180,38 C120,60 90,66 74,86" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#arrow)"/>
+      <path class="branch-national" d="M180,38 C240,60 270,66 286,86" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="74" y="106" text-anchor="middle" class="branch-local" font-family="Source Sans 3, sans-serif" font-size="12" fill="currentColor">Stay provincial</text>
+      <text x="286" y="106" text-anchor="middle" class="branch-national" font-family="Source Sans 3, sans-serif" font-size="12" fill="currentColor">Go federal</text>
+      <path class="branch-local" d="M74,112 C88,134 150,150 178,160" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path class="branch-national" d="M286,112 C272,134 210,150 182,160" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M180,160 L180,204" fill="none" stroke="currentColor" stroke-width="2" marker-end="url(#arrow)"/>
+    </svg>
+    <figcaption>Both paths lead back to the same requirement: registering the business again in every new
+      province it operates in — a step the <a href="https://www.canada.ca/en/one-canadian-economy/services/free-trade-labour-mobility-canada-act/user-guide-businesses-workers.html" target="_blank" rel="noopener" style="color:inherit">Free Trade and Labour Mobility in Canada Act</a> (in force
+      since January&nbsp;1,&nbsp;2026) does not cover, since that Act reaches product standards and worker
+      certifications, not corporate registration.</figcaption>
+  </figure>
+
+  <ol class="segment national">
+    <li class="stop national">
+      <span class="marker">7</span>
+      <div class="stop-body">
+        <h2 class="stop-title">Decide how to incorporate</h2>
+        <p class="stop-desc">Provincial stays cheaper and simpler while you're mostly selling in Alberta;
+          federal protects the name across the whole country but adds an extra annual filing.</p>
+        <span class="chip">$200 federal vs. $275 Alberta</span>
+        <div><a class="bizpal-link" href="https://ised-isde.canada.ca/site/corporations-canada/en/federal-incorporation" target="_blank" rel="noopener">Corporations Canada — Federal Incorporation →</a></div>
+      </div>
+    </li>
+    <li class="stop national">
+      <span class="marker">8</span>
+      <div class="stop-body">
+        <h2 class="stop-title">Register in every new province</h2>
+        <p class="stop-desc">Extra-provincial registration is required in each additional province you
+          actually do business in — even for a federally incorporated company, and even in your own home
+          province.</p>
+        <span class="chip">one filing per province, every time</span>
+        <div class="flag">
+          <b>Founder's note</b>
+          This is the one step in the whole journey that still felt like doing the same paperwork from
+          scratch in every province, with no federal pass-through — even after the 2026 trade and labour
+          mobility reforms.
+        </div>
+        <div class="trade-addendum" data-show="trades">
+          <b>If you're in the trades</b>
+          Your certification itself moves faster than your paperwork: Red Seal already grants national
+          recognition without retesting, and as of August&nbsp;27,&nbsp;2026 every province agreed to
+          recognize skilled trades certifications from other jurisdictions within 30 days. That's real
+          progress for the person — it just doesn't extend to registering the business itself in each new
+          province.
+        </div>
+        <p style="font-size:.85rem; color:var(--ink-soft); margin-top:12px; max-width:56ch;">There's no single
+          national page for this — each province runs its own extra-provincial registration process. Start
+          from your home registry: <a class="bizpal-link" href="https://www.alberta.ca/find-business-registry" target="_blank" rel="noopener" style="display:inline">Alberta.ca — Find a Business Registry →</a></p>
+      </div>
+    </li>
+    <li class="stop national">
+      <span class="marker">9</span>
+      <div class="stop-body">
+        <h2 class="stop-title">Track provincial sales tax</h2>
+        <p class="stop-desc">GST applies nationwide once registered, but what sits on top of it varies: BC,
+          Saskatchewan, and Manitoba add a separate PST; Quebec adds QST; Ontario and the Atlantic provinces
+          use a combined HST.</p>
+        <span class="chip">Alberta: GST only, no PST</span>
+        <div><a class="bizpal-link" href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html" target="_blank" rel="noopener">CRA — GST/HST Rates by Province →</a></div>
+      </div>
+    </li>
+    <li class="stop national">
+      <span class="marker">10</span>
+      <div class="stop-body">
+        <h2 class="stop-title">Stay compliant as you grow</h2>
+        <p class="stop-desc">Annual returns (provincial and/or federal), a T2 corporate tax filing every year
+          regardless of profit, and a renewed municipal licence in every city with a physical presence.</p>
+        <span class="chip">ongoing, every year</span>
+        <div><a class="bizpal-link" href="https://ised-isde.canada.ca/site/corporations-canada/en/annual-return-business-corporations" target="_blank" rel="noopener">Corporations Canada — Annual Return →</a></div>
+        <div><a class="bizpal-link" href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/corporations/corporation-income-tax-return/completing-your-corporation-income-tax-t2-return.html" target="_blank" rel="noopener">CRA — Completing Your T2 Return →</a></div>
+      </div>
+    </li>
+  </ol>
+
+  <footer>
+    <p class="attribution">An open prototype started by Edwin Olaez — Founder, Relay OPS Inc., Calgary,
+      Alberta — grown from <a href="https://claude.ai/code/artifact/5752511a-328b-44b3-a947-fba479be09e7" style="color:inherit">the original founder's-eye route map</a> shared with the Office of the
+      Secretary of State (Small Business and Tourism). September 2026.</p>
+    <p class="sources">
+      Sources: <a href="https://www.calgary.ca/for-business/getting-started.html">City of Calgary — Getting Started</a> ·
+      <a href="https://www.alberta.ca/register-business-name">Alberta.ca — Register a Business Name</a> ·
+      <a href="https://www.alberta.ca/find-business-registry">Alberta.ca — Find a Business Registry</a> ·
+      <a href="https://www.alberta.ca/regulatory-bodies">Alberta.ca — Regulatory Bodies</a> ·
+      <a href="https://www.bdc.ca/en/articles-tools/start-buy-business/start-business/advantages-different-business-structures">BDC — Comparing Business Structures</a> ·
+      <a href="https://www.canada.ca/en/services/taxes/resources-for-small-and-medium-businesses/business-number-registration.html">CRA — Business Number Registration</a> ·
+      <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/when-register-charge.html">CRA — When to Register for GST/HST</a> ·
+      <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/gst-hst-businesses/charge-collect-which-rate/calculator.html">CRA — GST/HST Rates by Province</a> ·
+      <a href="https://www.alberta.ca/small-business-resources">Alberta.ca — Small Business Resources</a> ·
+      <a href="https://www.platformcalgary.com/">Platform Calgary</a> ·
+      <a href="https://ised-isde.canada.ca/site/corporations-canada/en/federal-incorporation">Corporations Canada — Federal Incorporation</a> ·
+      <a href="https://ised-isde.canada.ca/site/corporations-canada/en/annual-return-business-corporations">Corporations Canada — Annual Return</a> ·
+      <a href="https://www.canada.ca/en/revenue-agency/services/tax/businesses/topics/corporations/corporation-income-tax-return/completing-your-corporation-income-tax-t2-return.html">CRA — Completing Your T2 Return</a> ·
+      <a href="https://rncanada.ca/resources/incorporate-business-canada">Federal vs. Provincial Incorporation (2026)</a> ·
+      <a href="https://www.simplyfybiz.com/blog/cost-to-incorporate-in-canada">Cost to Incorporate in Canada (2026)</a> ·
+      <a href="https://www.canada.ca/en/one-canadian-economy/services/free-trade-labour-mobility-canada-act/user-guide-businesses-workers.html">Free Trade and Labour Mobility in Canada Act — User Guide</a> ·
+      <a href="https://www.albertahealthservices.ca/assets/wf/eph/wf-eph-start-food-business.pdf">AHS — Starting a Food Business</a> ·
+      <a href="https://aglc.ca/liquor/liquor-licences/apply-liquor-licence">AGLC — Apply for a Liquor Licence</a> ·
+      <a href="https://tradesecrets.alberta.ca/become-certified/interprovincial-red-seal/">Tradesecrets Alberta — Red Seal</a> ·
+      <a href="https://www.wcb.ab.ca/insurance-and-premiums/types-of-coverage/coverage-for-contractors-and-subcontractors.html">WCB Alberta — Coverage for Contractors</a> ·
+      <a href="https://refdesk.ca/blog/interprovincial-trade-barriers-agreement-august-27-2026-skilled-trades-businesses-guide">30-Day Credential Recognition Guide</a> ·
+      <a href="https://ised-isde.canada.ca/site/canadian-intellectual-property-office/en/trademarks/registration-and-renewal-trademarks">CIPO — Trademark Registration</a> ·
+      <a href="https://www.canada.ca/content/canadasite/en/revenue-agency/services/scientific-research-experimental-development-tax-incentive-program/apply-pre-claim-approval.html">CRA — SR&amp;ED Pre-Claim Approval</a> ·
+      <a href="https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda_brief/">OPC — PIPEDA Requirements in Brief</a> ·
+      <a href="https://ised-isde.canada.ca/site/ised/en/ai-literacy-building-knowledge-and-skills-canadians">ISED — AI Literacy for Canadians</a> ·
+      <a href="https://ised-isde.canada.ca/site/ised/en/canadas-national-artificial-intelligence-strategy-ai-all">ISED — Canada's National AI Strategy: AI for All</a> ·
+      <a href="https://bizpal.ca/en/faq/">BizPaL</a> ·
+      <a href="https://www.bdc.ca/">BDC</a> ·
+      <a href="https://ised-isde.canada.ca/site/canada-small-business-financing-program/en">Canada Small Business Financing Program</a> ·
+      <a href="https://ised-isde.canada.ca/site/ised/en/programs-and-initiatives/women-entrepreneurship-strategy">Women Entrepreneurship Strategy</a> ·
+      <a href="https://www.canada.ca/en/prairies-economic-development.html">PrairiesCan</a> ·
+      <a href="https://businesslink.ca/">Business Link Alberta</a> ·
+      <a href="https://www.canada.ca/en/services/business/start/planning.html">canada.ca — Planning a Business</a> ·
+      <a href="https://ised-isde.canada.ca/site/ised/en/supports-for-business">ISED — Supports for Business</a> ·
+      <a href="https://innovation.canada.ca/innovation/s/?language=en_CA">Business Benefits Finder</a> ·
+      <a href="https://ised-isde.canada.ca/site/ised/en/programs-and-initiatives/black-entrepreneurship-program/black-entrepreneurship-loan-fund-frequently-asked-questions">Black Entrepreneurship Loan Fund</a> ·
+      <a href="https://ised-isde.canada.ca/site/ised/en/programs-and-initiatives/2slgbtqi-entrepreneurship-program">2SLGBTQI+ Entrepreneurship Program</a>
+    </p>
+  </footer>
+</div>
+
+<script>
+  (function(){
+    var picker = document.getElementById('industryPicker');
+    if(!picker) return;
+    picker.addEventListener('change', function(e){
+      if(e.target && e.target.name === 'industry'){
+        document.body.setAttribute('data-industry', e.target.value);
+      }
+    });
+    document.body.setAttribute('data-industry', 'none');
+  })();
+</script>
+
+</body></html>
